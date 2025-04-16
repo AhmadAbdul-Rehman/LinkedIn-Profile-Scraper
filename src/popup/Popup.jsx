@@ -3,12 +3,23 @@ import React, { useEffect, useState } from "react";
 const Popup = () => {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
+    const [isJobPage, setIsJobPage] = useState(false);
 
     useEffect(() => {
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
             const tab = tabs[0];
             if (!tab?.id) {
                 setError("No active tab found.");
+                return;
+            }
+
+            // Check if the current URL includes the LinkedIn jobs collection URL
+            if (
+                tab.url?.includes(
+                    "https://www.linkedin.com/jobs/collections/recommended/"
+                )
+            ) {
+                setIsJobPage(true);
                 return;
             }
 
@@ -32,6 +43,14 @@ const Popup = () => {
                             setData(response);
                         }
                     );
+
+                    // chrome.tabs.sendMessage(
+                    //     tab.id,
+                    //     { action: "scrapeLinkedInJobsRecommendedPage" },
+                    //     (response) => {
+                    //         setData(response);
+                    //     }
+                    // );
                 }
             );
         });
@@ -40,6 +59,23 @@ const Popup = () => {
     if (error) {
         return <div className="p-4 text-red-500">{error}</div>;
     }
+
+    // if (isJobPage) {
+    //     return (
+    //         <div className="p-4 bg-white h-full w-full flex items-center gap-2">
+    //             <div className="text-black text-sm">
+    //                 LinkedIn Jobs Recommended page.
+    //             </div>
+    //             <div className="text-black text-sm">
+    //                     <div>
+    //                         <h1>{data?.title}</h1>
+    //                         <p>{data?.company}</p>
+    //                         <p>{data?.location}</p>
+    //                     </div>
+    //             </div>
+    //         </div>
+    //     );
+    // }
 
     if (!data) {
         return <div className="p-4 text-gray-600"> Loading profile...</div>;
@@ -88,7 +124,8 @@ const Popup = () => {
             <div>
                 <strong>Services List:</strong>
                 <p className="mt-1 whitespace-pre-wrap bg-gray-100 p-2 rounded text-xs max-h-28 overflow-y-auto">
-                    {data?.servicesList?.join(", ") || "Services list not found"}
+                    {data?.servicesList?.join(", ") ||
+                        "Services list not found"}
                 </p>
             </div>
             <div>

@@ -1,28 +1,28 @@
 function scrapeLinkedInProfile() {
     // Main Container
     const main = document?.getElementsByTagName("main")[0];
-    
+
     // --- Name ---
-    const name = document?.getElementById("ember38")?.innerText || 
-                 document?.getElementById("ember37")?.innerText || 
-                 document.querySelector('a.ember-view[href*="/overlay/about-this-profile/"] h1')?.innerText || 
-                 "Can't find name";
-    
+    const name = document?.getElementById("ember38")?.innerText ||
+        document?.getElementById("ember37")?.innerText ||
+        document.querySelector('a.ember-view[href*="/overlay/about-this-profile/"] h1')?.innerText ||
+        "Can't find name";
+
     // --- Headline ---
-    const headline = document?.querySelectorAll(".SrNMImTCbBPBwFOOiWhprUNPxktTZlGU")[0]?.querySelector(".text-body-medium")?.innerText || 
-                    main?.childNodes[9]?.querySelector(".text-body-medium")?.innerText || 
-                    "Can't find headline";
-    
+    const headline = document?.querySelectorAll(".SrNMImTCbBPBwFOOiWhprUNPxktTZlGU")[0]?.querySelector(".text-body-medium")?.innerText ||
+        main?.childNodes[9]?.querySelector(".text-body-medium")?.innerText ||
+        "Can't find headline";
+
     // --- Location ---
-    const location = main?.childNodes[9]?.querySelector("span.text-body-small.inline.t-black--light.break-words")?.innerText || 
-                    "Location Not Found";
-    
+    const location = main?.childNodes[9]?.querySelector("span.text-body-small.inline.t-black--light.break-words")?.innerText ||
+        "Location Not Found";
+
     // --- Next Button ---
     const nextBtn = document?.querySelector("#ember3764");
-    
+
     // --- Post Link ---
     const postLink = window.location.href;
-    
+
     // --- Posts Url ---
     const postsUrl = window.location.href + "recent-activity/all/";
 
@@ -32,7 +32,7 @@ function scrapeLinkedInProfile() {
     let about = "About content not found";
     let topSkillList = "Top Skills content not found";
     const mainChildren = main?.childNodes;
-    
+
     if (mainChildren) {
         for (const child of mainChildren) {
             // Only process Element nodes (nodeType === 1)
@@ -41,9 +41,9 @@ function scrapeLinkedInProfile() {
                 if (header?.toLowerCase().includes("about")) {
                     topSkillList = child.querySelector("[data-view-name='profile-component-entity']")?.querySelectorAll("span.visually-hidden")[1]?.innerText;
                     about = child.querySelector('.guoMOndwQfrqcNISpQhIvArpasFrRno')?.querySelector("span.visually-hidden")?.innerText ||
-                            child.querySelector(".inline-show-more-text--is-collapsed")?.querySelector("span.visually-hidden")?.innerText ||
-                            child.querySelector("div.full-width.t-14.t-normal.t-black.display-flex.align-items-center")?.querySelector("span.visually-hidden")?.innerText ||
-                            "About content not found";
+                        child.querySelector(".inline-show-more-text--is-collapsed")?.querySelector("span.visually-hidden")?.innerText ||
+                        child.querySelector("div.full-width.t-14.t-normal.t-black.display-flex.align-items-center")?.querySelector("span.visually-hidden")?.innerText ||
+                        "About content not found";
                     break;
                 }
             }
@@ -79,7 +79,7 @@ function scrapeLinkedInProfile() {
 
     // --- Dynamic Projects Section Search ---
     let projects = [];
-    
+
     if (mainChildren) {
         for (const child of mainChildren) {
             // Only process Element nodes (nodeType === 1)
@@ -121,7 +121,7 @@ function scrapeLinkedInProfile() {
 
     // --- Dynamic Activity Section Search for Posts ---
     let postElements = document.getElementById("ember3753")?.querySelectorAll("li.artdeco-carousel__item");
-    
+
     if (!postElements || postElements.length === 0) {
         if (mainChildren) {
             for (const child of mainChildren) {
@@ -136,7 +136,7 @@ function scrapeLinkedInProfile() {
             }
         }
     }
-    
+
     const posts = postElements ? Array.from(postElements).map((post) => {
         const text = post?.querySelector(".tvm-parent-container")?.innerText;
         nextBtn?.click();
@@ -165,8 +165,26 @@ function scrapeLinkedInProfile() {
     };
 }
 
+// --- LinkedIn Jobs Recommended Page ---
+// function scrapeLinkedInJobsRecommendedPage() {
+//     const wrapper = document?.querySelector(".jobs-search__job-details--wrappert");
+//     const jobs = wrapper?.querySelectorAll(".job-result-card");
+
+
+//     const title = job?.querySelector("a.ember-view")?.innerText;
+//     const company = job?.querySelector(".job-details-jobs-unified-top-card__company-name")?.innerText;
+//     const location = job?.querySelector(".job-result-card__location")?.innerText;
+//     const about = job?.querySelector(".job-result-card__about")?.innerText;
+//     const description = job?.querySelector(".job-result-card__description")?.innerText;
+//     return { title, company, location, description, about };
+
+// }
+
 chrome.runtime.onMessage.addListener((req, sender, sendResponse) => {
     if (req.action === "scrapeLinkedIn") {
         sendResponse(scrapeLinkedInProfile());
     }
+    // else if (req.action === "scrapeLinkedInJobsRecommendedPage") {
+    //     sendResponse(scrapeLinkedInJobsRecommendedPage());
+    // }
 });

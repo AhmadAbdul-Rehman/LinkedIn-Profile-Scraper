@@ -8,7 +8,8 @@
       "https://github.com/*",
       "https://linkedin.com/*",
       "https://www.linkedin.com/*",
-      "https://pk.linkedin.com/*"
+      "https://pk.linkedin.com/*",
+      "https://www.linkedin.com/jobs/collections/recommended/*"
     ],
     "action": {
       "default_popup": "index.html",
