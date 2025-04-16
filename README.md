@@ -16,7 +16,7 @@ To run the React extension, follow these steps:
    npm install
    ```
 
-2. Create the development server:
+2. Create the production build:
    ```sh
    npm run build
    ```
