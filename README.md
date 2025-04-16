@@ -11,18 +11,23 @@ Currently, two official plugins are available:
 
 To run the React extension, follow these steps:
 
-1. First, run the development server:
+1. Install the necessary node modules:
    ```sh
-   npm run dev
+   npm install
    ```
 
-2. After the build is complete, locate the `dist` folder in your project directory.
+2. Create the development server:
+   ```sh
+   npm run build
+   ```
 
-3. Open Chrome and navigate to `chrome://extensions/`.
+3. After the build is complete, locate the `dist` folder in your project directory.
 
-4. Enable "Developer mode" by toggling the switch in the top right corner.
+4. Open Chrome and navigate to `chrome://extensions/`.
 
-5. Click on the "Load unpacked" button and select the `dist` folder from your project directory.
+5. Enable "Developer mode" by toggling the switch in the top right corner.
+
+6. Click on the "Load unpacked" button and select the `dist` folder from your project directory.
 
 Your React extension should now be loaded and running in Chrome.
 
