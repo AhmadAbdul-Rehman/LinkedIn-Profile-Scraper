@@ -1,11 +1,10 @@
 {
     "manifest_version": 3,
-    "name": "Profile Scraper",
+    "name": "LinkedIn Scraper",
     "version": "1.0",
-    "description": "Extracts GitHub and LinkedIn user profile data",
-    "permissions": ["activeTab", "scripting", "tabs"],
+    "description": "Scrape LinkedIn profiles and jobs data",
+    "permissions": ["activeTab", "scripting", "tabs", "storage"],
     "host_permissions": [
-      "https://github.com/*",
       "https://linkedin.com/*",
       "https://www.linkedin.com/*",
       "https://pk.linkedin.com/*",
@@ -14,19 +13,14 @@
     "action": {
       "default_popup": "index.html",
       "default_icon": {
-        "16": "theif.jpg",
-        "48": "theif.jpg",
-        "128": "theif.jpg"
+        "16": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
       }
     },
     "content_scripts": [
       {
-        "matches": [
-          "https://github.com/*",
-          "https://linkedin.com/*",
-          "https://www.linkedin.com/*",
-          "https://pk.linkedin.com/*"
-        ],
+        "matches": ["<all_urls>"],
         "js": ["content.js"],
         "run_at": "document_idle"
       }
