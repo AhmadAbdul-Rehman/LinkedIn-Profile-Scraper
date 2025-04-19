@@ -1,36 +1,101 @@
-# React + Vite
+# LinkedIn Profile Scraper
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Chrome extension designed to scrape and display LinkedIn profile and job listing information in a clean, user-friendly popup. Extract key details like name, headline, skills, education, and job data, with features like theme persistence, profile summary generation, and easy data copying.
 
-Currently, two official plugins are available:
+## Features
+- **Profile Scraping**: Extracts details from LinkedIn profiles, including name, headline, location, about, skills, education, projects, services, and recent posts.
+- **Job Scraping**: Pulls job title, company, location, and description from LinkedIn job listings.
+- **Theme Persistence**: Supports light and dark modes, with user preferences saved across sessions using `chrome.storage`.
+- **Summary Generation**: Adds a dynamic summary section to LinkedIn profile pages, preventing duplicates.
+- **Data Copying**: Copy profile or job data to the clipboard in a formatted string.
+- **Responsive UI**: Built with React and Tailwind CSS for a modern, responsive popup interface.
+- **Error Handling**: Displays clear error messages for failed scrapes or missing data.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/your-username/linkedin-profile-scraper.git
+   ```
+2. **Load the Extension in Chrome**:
+   - Open Chrome and navigate to `chrome://extensions/`.
+   - Enable **Developer mode** (top-right toggle).
+   - Click **Load unpacked** and select the cloned repository folder.
+3. **Verify Installation**:
+   - The extension should appear in your Chrome extensions list.
+   - Pin the extension to the toolbar for easy access.
 
-## Running the React Extension
+## Usage
+1. **Open the Popup**:
+   - Click the extension icon in the Chrome toolbar while on a LinkedIn profile (`https://www.linkedin.com/in/*`), job listing (`https://www.linkedin.com/jobs/collections/recommended/*`), or any other webpage.
+2. **View Scraped Data**:
+   - **Profile Page**: See name, headline, location, about, skills, education, projects, services, and posts.
+   - **Job Page**: View job title, company, location, and description.
+   - **Other Pages**: Extract and display page text content.
+3. **Generate Summary**:
+   - On a profile page, click **Generate Summary** to add a summary section to the LinkedIn sidebar. The extension prevents duplicate sections.
+4. **Copy Data**:
+   - Click **Copy** to copy profile or job data to the clipboard in a formatted string.
+5. **Toggle Theme**:
+   - Click the sun/moon icon to switch between light and dark modes. Your preference is saved automatically.
+6. **Proceed**:
+   - Click **Proceed** to open the extension’s options page (if implemented).
 
-To run the React extension, follow these steps:
+## Screenshots
+*(Add screenshots to your repository in a `/screenshots` folder and update the links below)*
 
-1. Install the necessary node modules:
-   ```sh
+- **Profile View**: ![Profile View](screenshots/profile-view.png)
+- **Job View**: ![Job View](screenshots/job-view.png)
+- **Dark Mode**: ![Dark Mode](screenshots/dark-mode.png)
+- **Summary Section**: ![Summary Section](screenshots/summary-section.png)
+
+## Permissions
+The extension requires the following permissions (defined in `manifest.json`):
+- `activeTab`: Access the active tab for scraping.
+- `scripting`: Inject `content.js` to scrape page data.
+- `tabs`: Query tab URLs to determine page type.
+- `storage`: Save theme preferences.
+
+## Development
+### Prerequisites
+- Node.js and npm (for React development).
+- Chrome browser.
+
+### Setup
+1. Install dependencies:
+   ```bash
    npm install
    ```
-
-2. Create the production build:
-   ```sh
+2. Build the React app:
+   ```bash
    npm run build
    ```
+3. Load the `build` folder as an unpacked extension in Chrome.
 
-3. After the build is complete, locate the `dist` folder in your project directory.
+### File Structure
+- `src/Popup.jsx`: React component for the popup UI.
+- `src/content.js`: Content script for scraping LinkedIn and other pages.
+- `manifest.json`: Extension configuration.
+- `public/`: Static assets and HTML template.
+- `build/`: Compiled extension files.
 
-4. Open Chrome and navigate to `chrome://extensions/`.
+## Contributing
+Contributions are welcome! Please follow these steps:
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/your-feature`).
+3. Commit changes (`git commit -m "Add your feature"`).
+4. Push to the branch (`git push origin feature/your-feature`).
+5. Open a pull request.
 
-5. Enable "Developer mode" by toggling the switch in the top right corner.
+## Issues
+Report bugs or suggest features by opening an issue on the [GitHub Issues page](https://github.com/your-username/linkedin-profile-scraper/issues).
 
-6. Click on the "Load unpacked" button and select the `dist` folder from your project directory.
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-Your React extension should now be loaded and running in Chrome.
+## Acknowledgments
+- Built with [React](https://reactjs.org/), [Tailwind CSS](https://tailwindcss.com/), and [React Icons](https://react-icons.github.io/react-icons/).
+- Inspired by the need for efficient LinkedIn data extraction.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**Note**: Replace `your-username` in the repository URL with your actual GitHub username. Add screenshots to a `screenshots/` folder in your repository and update the README with the correct paths. If you have a specific license or additional acknowledgments, include them in the README.
