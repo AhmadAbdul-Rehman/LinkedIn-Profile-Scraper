@@ -14,7 +14,7 @@ A Chrome extension designed to scrape and display LinkedIn profile and job listi
 ## Installation
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/linkedin-profile-scraper.git
+   git clone https://github.com/AhmadAbdul-Rehman/linkedin-profile-scraper.git
    ```
 2. **Load the Extension in Chrome**:
    - Open Chrome and navigate to `chrome://extensions/`.
@@ -97,5 +97,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - Inspired by the need for efficient LinkedIn data extraction.
 
 ---
-
-**Note**: Replace `your-username` in the repository URL with your actual GitHub username. Add screenshots to a `screenshots/` folder in your repository and update the README with the correct paths. If you have a specific license or additional acknowledgments, include them in the README.
